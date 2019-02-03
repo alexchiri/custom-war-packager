@@ -70,6 +70,9 @@ public class JenkinsDockerfileBuilder extends DockerfileBuilder {
         }
         ps.println("FROM " + dockerSettings.getBase());
 
+        // hack to be able to run Jenkins Docker image on top of a local pv in Kubernetes
+        ps.println("USER root");
+
         // Labels
         StringBuilder labelString = new StringBuilder("LABEL Version=\"");
         labelString.append(config.buildSettings.getVersion());
